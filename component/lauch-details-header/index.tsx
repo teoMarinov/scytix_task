@@ -12,8 +12,8 @@ export default function LaunchDetailsHeader({
     launchData?.links?.mission_patch ||
     launchData?.links?.flickr_images?.at(-1) ||
     "/png/no-launch-image.png";
-  console.log(format(launchData?.launch_date_local, "dd/MM/yyyy"));
-  return (
+
+    return (
     <Box
       sx={{
         position: "relative",
@@ -41,8 +41,20 @@ export default function LaunchDetailsHeader({
           <Typography variant="h4" fontWeight={"bold"}>
             {launchData.mission_name}
           </Typography>
+
           <Typography fontSize={"14px"} pl={0.3}>
             {format(launchData?.launch_date_local, "dd/MM/yyyy")}
+
+            <Box
+              component="span"
+              sx={{
+                marginLeft: 1,
+                fontWeight: 500,
+                color: launchData.launch_success ? "green" : "red",
+              }}
+            >
+              {launchData.launch_success ? "Success" : "Fail"}
+            </Box>
           </Typography>
         </Stack>
       </Box>

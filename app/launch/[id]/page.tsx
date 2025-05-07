@@ -1,11 +1,13 @@
 "use client";
 
+import { Stack } from "@mui/material";
 import Loader from "@/component/loader";
 import { useEffect, useState } from "react";
 import { getLaunchById } from "@/api/launches";
 import RocketInfo from "@/component/rocket-info";
 import LauchPageProps, { LaunchById } from "./type";
 import LaunchDetailsHeader from "@/component/lauch-details-header";
+import YouTubeEmbed from "@/component/youtube-embed";
 
 export default function LauchPage({ params }: LauchPageProps) {
   const [id, setId] = useState("");
@@ -28,10 +30,14 @@ export default function LauchPage({ params }: LauchPageProps) {
     <div>
       <LaunchDetailsHeader launchData={launchData} />
 
-      <RocketInfo
-        title={launchData.rocket?.rocket_name as string}
-        description={launchData.rocket?.rocket?.description as string}
-      />
+      <Stack padding={3} gap={4}>
+        <RocketInfo
+          title={launchData.rocket?.rocket_name as string}
+          description={launchData.rocket?.rocket?.description as string}
+        />
+
+        <YouTubeEmbed videoId="OvHJSIKP0Hg" />
+      </Stack>
     </div>
   );
 }
