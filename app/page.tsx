@@ -1,17 +1,11 @@
 "use client";
 
+import Loader from "@/component/loader";
 import { LaunchQueryResult } from "./type";
 import { useEffect, useState } from "react";
 import LaunchCard from "@/component/launch-card";
 import { fetchAllLaunches, getAllLauchesCount } from "@/api/launches";
-import {
-  Box,
-  CircularProgress,
-  Grid,
-  Pagination,
-  Stack,
-  useMediaQuery,
-} from "@mui/material";
+import { Grid, Stack, Pagination, useMediaQuery } from "@mui/material";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -27,7 +21,9 @@ export default function Home() {
     const fetchLaunches = async () => {
       try {
         setLoading(true);
+
         const response = await fetchAllLaunches(page);
+
         setLaunches(response.data.launches || []);
       } catch (err) {
         setError(err as Error);
@@ -36,26 +32,15 @@ export default function Home() {
       }
 
       const pageCount = await getAllLauchesCount();
-      setTotalPages(pageCount)
+      
+      setTotalPages(pageCount);
     };
-
 
     fetchLaunches();
   }, [page]);
 
-  if (loading)
-    return (
-      <Box
-        width={"100%"}
-        height={"100vh"}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        <CircularProgress />
-      </Box>
-    );
-    
+  if (loading) return <Loader />;
+
   if (error) return <p>Error: {error.message}</p>;
 
   return (
