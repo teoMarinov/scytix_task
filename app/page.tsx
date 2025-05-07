@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import LaunchCard from "@/component/launch-card";
 import { fetchAllLaunches, getAllLauchesCount } from "@/api/launches";
 import {
+  Box,
   CircularProgress,
   Grid,
   Pagination,
@@ -41,27 +42,31 @@ export default function Home() {
 
   if (loading)
     return (
-      <p>
+      <Box
+        width={"100%"}
+        height={"100vh"}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
         <CircularProgress />
-      </p>
+      </Box>
     );
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
-      <Stack alignItems="center">
-        <Grid container columns={isLargeScreen ? 2 : 1} spacing={3} padding={3}>
-          {launches.map((launch) =>
-            launch ? <LaunchCard key={launch.id} launch={launch} /> : null
-          )}
-        </Grid>
+    <Stack alignItems="center" pb={3}>
+      <Grid container columns={isLargeScreen ? 2 : 1} spacing={2} padding={2}>
+        {launches.map((launch) =>
+          launch ? <LaunchCard key={launch.id} launch={launch} /> : null
+        )}
+      </Grid>
 
-        <Pagination
-          page={page}
-          count={totalPages}
-          onChange={(_, newPage) => setPage(newPage)}
-        />
-      </Stack>
-    </div>
+      <Pagination
+        page={page}
+        count={totalPages}
+        onChange={(_, newPage) => setPage(newPage)}
+      />
+    </Stack>
   );
 }
