@@ -13,6 +13,9 @@ export const LAUNCHES_QUERY = gql`
         site_name
       }
       launch_success
+      links {
+        flickr_images
+      }
     }
   }
 `;
@@ -24,3 +27,7 @@ export const ALL_LAUCHES_ID_QUERY = gql`
     }
   }
 `;
+
+// export const GET_LAUNCH_BY_ID = gql`
+// query
+// `
