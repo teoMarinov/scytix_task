@@ -1,5 +1,5 @@
-import styles from "./page.module.css";
 import { fetchAllLaunches } from "@/api/launches";
+import LaunchesList from "@/component/launches-list";
 
 export default async function Home() {
   const {
@@ -12,12 +12,5 @@ export default async function Home() {
 
   if (error) return <p>Error: {error.message}</p>;
 
-  return (
-    <div className={styles.page}>
-      {launches &&
-        launches.map(
-          (launch) => launch && <p key={launch.id}>{launch.mission_name}</p>
-        )}
-    </div>
-  );
+  return launches && <LaunchesList launches={launches} />;
 }

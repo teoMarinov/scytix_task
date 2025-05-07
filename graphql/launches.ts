@@ -11,8 +11,6 @@ export const LAUNCHES_QUERY = gql`
       }
       launch_site {
         site_name
-        site_name_long
-        site_id
       }
       launch_success
     }
