@@ -8,6 +8,7 @@ import RocketInfo from "@/component/rocket-info";
 import LauchPageProps, { LaunchById } from "./type";
 import LaunchDetailsHeader from "@/component/lauch-details-header";
 import YouTubeEmbed from "@/component/youtube-embed";
+import { getYouTubeVideoId } from "@/utils/extractYoutubeId";
 
 export default function LauchPage({ params }: LauchPageProps) {
   const [id, setId] = useState("");
@@ -36,7 +37,9 @@ export default function LauchPage({ params }: LauchPageProps) {
           description={launchData.rocket?.rocket?.description as string}
         />
 
-        <YouTubeEmbed videoId="OvHJSIKP0Hg" />
+        <YouTubeEmbed
+          videoId={getYouTubeVideoId(launchData.links?.video_link as string)!}
+        />
       </Stack>
     </div>
   );
