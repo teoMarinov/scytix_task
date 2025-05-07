@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LAUNCHES_QUERY = gql`
   query Launches($limit: Int, $offset: Int) {
@@ -13,6 +13,14 @@ export const LAUNCHES_QUERY = gql`
         site_name
       }
       launch_success
+    }
+  }
+`;
+
+export const ALL_LAUCHES_ID_QUERY = gql`
+  query LaunchesIds {
+    launches {
+      id
     }
   }
 `;

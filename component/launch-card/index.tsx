@@ -26,7 +26,14 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
         alignItems={"center"}
         justifyContent={"space-between"}
       >
-        <Typography fontSize={23} fontWeight={"bold"}>
+        <Typography
+          fontSize={23}
+          width={"70%"}
+          fontWeight={"bold"}
+          overflow={"hidden"}
+          textOverflow={"ellipsis"}
+          sx={{ textWrap: "nowrap" }}
+        >
           {launch.mission_name}
         </Typography>
 
