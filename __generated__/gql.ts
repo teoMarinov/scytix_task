@@ -14,10 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n      query launches($limit: Int, $offset: Int) {\n        launches(limit: $limit, offset: $offset) {\n          id\n          mission_name\n        }\n      }\n    ": typeof types.LaunchesDocument,
+    "\n  query Launches($limit: Int, $offset: Int) {\n    launches(limit: $limit, offset: $offset) {\n      id\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n      }\n      launch_site {\n        site_name\n        site_name_long\n        site_id\n      }\n      launch_success\n    }\n  }\n": typeof types.LaunchesDocument,
 };
 const documents: Documents = {
-    "\n      query launches($limit: Int, $offset: Int) {\n        launches(limit: $limit, offset: $offset) {\n          id\n          mission_name\n        }\n      }\n    ": types.LaunchesDocument,
+    "\n  query Launches($limit: Int, $offset: Int) {\n    launches(limit: $limit, offset: $offset) {\n      id\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n      }\n      launch_site {\n        site_name\n        site_name_long\n        site_id\n      }\n      launch_success\n    }\n  }\n": types.LaunchesDocument,
 };
 
 /**
@@ -37,7 +37,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n      query launches($limit: Int, $offset: Int) {\n        launches(limit: $limit, offset: $offset) {\n          id\n          mission_name\n        }\n      }\n    "): (typeof documents)["\n      query launches($limit: Int, $offset: Int) {\n        launches(limit: $limit, offset: $offset) {\n          id\n          mission_name\n        }\n      }\n    "];
+export function gql(source: "\n  query Launches($limit: Int, $offset: Int) {\n    launches(limit: $limit, offset: $offset) {\n      id\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n      }\n      launch_site {\n        site_name\n        site_name_long\n        site_id\n      }\n      launch_success\n    }\n  }\n"): (typeof documents)["\n  query Launches($limit: Int, $offset: Int) {\n    launches(limit: $limit, offset: $offset) {\n      id\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n      }\n      launch_site {\n        site_name\n        site_name_long\n        site_id\n      }\n      launch_success\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

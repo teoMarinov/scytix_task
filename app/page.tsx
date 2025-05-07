@@ -1,29 +1,23 @@
 import styles from "./page.module.css";
-import createApolloClient from "@/apollo-client";
-import { gql } from "@apollo/client";
-import { Launch } from "@/__generated__/graphql";
+import { fetchAllLaunches } from "@/api/launches";
 
 export default async function Home() {
-  const client = createApolloClient();
-  const { data } = await client.query({
-    query: gql`
-      query launches($limit: Int, $offset: Int) {
-        launches(limit: $limit, offset: $offset) {
-          id
-          mission_name
-        }
-      }
-    `,
-    variables: {
-      limit: 10,
-      offset: 10,
-    },
-  });
+  const {
+    data: { launches },
+    loading,
+    error,
+  } = await fetchAllLaunches(1);
+
+  if (loading) return <p>Page is loading...</p>;
+
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <div className={styles.page}>
-      {data.launches.map((launch: Launch) => (
-        <p key={launch.id}>{launch.mission_id}</p>
-      ))}
+      {launches &&
+        launches.map(
+          (launch) => launch && <p key={launch.id}>{launch.mission_name}</p>
+        )}
     </div>
   );
 }
