@@ -1,23 +1,72 @@
-import styles from "./page.module.css";
-import { fetchAllLaunches } from "@/api/launches";
+"use client";
 
-export default async function Home() {
-  const {
-    data: { launches },
-    loading,
-    error,
-  } = await fetchAllLaunches(1);
+import { LaunchQueryResult } from "./type";
+import { useEffect, useState } from "react";
+import LaunchCard from "@/component/launch-card";
+import { fetchAllLaunches, getAllLauchesCount } from "@/api/launches";
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  Pagination,
+  Stack,
+  useMediaQuery,
+} from "@mui/material";
 
-  if (loading) return <p>Page is loading...</p>;
+export default function Home() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [launches, setLaunches] = useState<LaunchQueryResult[]>([]);
 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const isLargeScreen = useMediaQuery("(min-width:700px)");
+
+  useEffect(() => {
+    const fetchLaunches = async () => {
+      try {
+        setLoading(true);
+        const response = await fetchAllLaunches(page);
+        setLaunches(response.data.launches || []);
+      } catch (err) {
+        setError(err as Error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLaunches();
+    getAllLauchesCount().then((pageCount) => setTotalPages(pageCount));
+  }, [page]);
+
+  if (loading)
+    return (
+      <Box
+        width={"100%"}
+        height={"100vh"}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <CircularProgress />
+      </Box>
+    );
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className={styles.page}>
-      {launches &&
-        launches.map(
-          (launch) => launch && <p key={launch.id}>{launch.mission_name}</p>
+    <Stack alignItems="center" pb={3}>
+      <Grid container columns={isLargeScreen ? 2 : 1} spacing={2} padding={2}>
+        {launches.map((launch) =>
+          launch ? <LaunchCard key={launch.id} launch={launch} /> : null
         )}
-    </div>
+      </Grid>
+
+      <Pagination
+        page={page}
+        count={totalPages}
+        onChange={(_, newPage) => setPage(newPage)}
+      />
+    </Stack>
   );
 }
