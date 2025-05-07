@@ -1,9 +1,11 @@
 "use client";
-import { getLaunchById } from "@/api/launches";
+
+import Loader from "@/component/loader";
 import { useEffect, useState } from "react";
+import { getLaunchById } from "@/api/launches";
+import RocketInfo from "@/component/rocket-info";
 import LauchPageProps, { LaunchById } from "./type";
 import LaunchDetailsHeader from "@/component/lauch-details-header";
-import Loader from "@/component/loader";
 
 export default function LauchPage({ params }: LauchPageProps) {
   const [id, setId] = useState("");
@@ -12,6 +14,7 @@ export default function LauchPage({ params }: LauchPageProps) {
 
   useEffect(() => {
     params.then(({ id }) => setId(id));
+
     getLaunchById(id)
       .then(({ data }) => setLaunchData(data.launch))
       .finally(() => setLoading(false));
@@ -24,6 +27,11 @@ export default function LauchPage({ params }: LauchPageProps) {
   return (
     <div>
       <LaunchDetailsHeader launchData={launchData} />
+
+      <RocketInfo
+        title={launchData.rocket?.rocket_name as string}
+        description={launchData.rocket?.rocket?.description as string}
+      />
     </div>
   );
 }
