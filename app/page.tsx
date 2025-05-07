@@ -34,10 +34,13 @@ export default function Home() {
       } finally {
         setLoading(false);
       }
+
+      const pageCount = await getAllLauchesCount();
+      setTotalPages(pageCount)
     };
 
+
     fetchLaunches();
-    getAllLauchesCount().then((pageCount) => setTotalPages(pageCount));
   }, [page]);
 
   if (loading)
@@ -52,6 +55,7 @@ export default function Home() {
         <CircularProgress />
       </Box>
     );
+    
   if (error) return <p>Error: {error.message}</p>;
 
   return (

@@ -1,4 +1,4 @@
-import { LaunchQueryResult } from "../launches-list/type";
+import { LaunchQueryResult } from "@/app/type";
 
 export default interface LaunchCardProps {
   launch: NonNullable<LaunchQueryResult>;
