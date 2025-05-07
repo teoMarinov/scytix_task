@@ -2,7 +2,7 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: "https://spacex-production.up.railway.app/",
-  documents: ["**/*.tsx"],
+  documents: ["graphql/*.ts"],
   generates: {
     "./__generated__/": {
       preset: "client",
@@ -10,9 +10,6 @@ const config: CodegenConfig = {
         gqlTagName: "gql",
       },
     },
-        "./__generated__/types.ts": {
-          plugins: ["typescript", "typescript-operations"],
-        },
   },
 };
 
