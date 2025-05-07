@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 export default function Header() {
   return (
     <header>
-      <Box padding={2} pb={0}>
+      <Box padding={2} >
         <Link href={"/"}>
           <Image
             aria-hidden

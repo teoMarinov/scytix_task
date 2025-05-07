@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <Stack alignItems="center" pb={3}>
-      <Grid container columns={isLargeScreen ? 2 : 1} spacing={2} padding={2}>
+      <Grid container columns={isLargeScreen ? 2 : 1} spacing={2} px={2} pb={3}>
         {launches.map((launch) =>
           launch ? <LaunchCard key={launch.id} launch={launch} /> : null
         )}
