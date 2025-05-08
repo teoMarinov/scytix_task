@@ -43,10 +43,14 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
               {launch.mission_name} -
               {format(launch.launch_date_local, "dd/MM/yyyy")}
             </Typography>
+
             <Typography>Rocket: {launch.rocket?.rocket_name}</Typography>
+            
             <Typography>
+
               Launch site: {launch.launch_site?.site_name || "-"}
             </Typography>
+
             <Typography color={launch.launch_success ? "green" : "red"}>
               {launch.launch_success ? "Success" : "Fail"}
             </Typography>

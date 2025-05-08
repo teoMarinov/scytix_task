@@ -28,6 +28,32 @@ export const ALL_LAUCHES_ID_QUERY = gql`
   }
 `;
 
-// export const GET_LAUNCH_BY_ID = gql`
-// query
-// `
+export const GET_LAUNCH_BY_ID = gql`
+  query LaunchById ($launchId: ID!) {
+    launch(id: $launchId) {
+      mission_name
+      launch_date_local
+      rocket {
+        rocket_name
+        rocket {
+          description
+        }
+        rocket_type
+      }
+      links {
+        mission_patch
+        mission_patch_small
+        video_link
+        flickr_images
+        reddit_launch
+        article_link
+        wikipedia
+        reddit_recovery
+        reddit_media
+        reddit_campaign
+        presskit
+      }
+      launch_success
+    }
+  }
+`;

@@ -16,10 +16,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 type Documents = {
     "\n  query Launches($limit: Int, $offset: Int) {\n    launches(limit: $limit, offset: $offset) {\n      id\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n      }\n      launch_site {\n        site_name\n      }\n      launch_success\n      links {\n        flickr_images\n      }\n    }\n  }\n": typeof types.LaunchesDocument,
     "\n  query LaunchesIds {\n    launches {\n      id\n    }\n  }\n": typeof types.LaunchesIdsDocument,
+    "\n  query LaunchById ($launchId: ID!) {\n    launch(id: $launchId) {\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n        rocket {\n          description\n        }\n        rocket_type\n      }\n      links {\n        mission_patch\n        mission_patch_small\n        video_link\n        flickr_images\n        reddit_launch\n        article_link\n        wikipedia\n        reddit_recovery\n        reddit_media\n        reddit_campaign\n        presskit\n      }\n      launch_success\n    }\n  }\n": typeof types.LaunchByIdDocument,
 };
 const documents: Documents = {
     "\n  query Launches($limit: Int, $offset: Int) {\n    launches(limit: $limit, offset: $offset) {\n      id\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n      }\n      launch_site {\n        site_name\n      }\n      launch_success\n      links {\n        flickr_images\n      }\n    }\n  }\n": types.LaunchesDocument,
     "\n  query LaunchesIds {\n    launches {\n      id\n    }\n  }\n": types.LaunchesIdsDocument,
+    "\n  query LaunchById ($launchId: ID!) {\n    launch(id: $launchId) {\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n        rocket {\n          description\n        }\n        rocket_type\n      }\n      links {\n        mission_patch\n        mission_patch_small\n        video_link\n        flickr_images\n        reddit_launch\n        article_link\n        wikipedia\n        reddit_recovery\n        reddit_media\n        reddit_campaign\n        presskit\n      }\n      launch_success\n    }\n  }\n": types.LaunchByIdDocument,
 };
 
 /**
@@ -44,6 +46,10 @@ export function gql(source: "\n  query Launches($limit: Int, $offset: Int) {\n  
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query LaunchesIds {\n    launches {\n      id\n    }\n  }\n"): (typeof documents)["\n  query LaunchesIds {\n    launches {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query LaunchById ($launchId: ID!) {\n    launch(id: $launchId) {\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n        rocket {\n          description\n        }\n        rocket_type\n      }\n      links {\n        mission_patch\n        mission_patch_small\n        video_link\n        flickr_images\n        reddit_launch\n        article_link\n        wikipedia\n        reddit_recovery\n        reddit_media\n        reddit_campaign\n        presskit\n      }\n      launch_success\n    }\n  }\n"): (typeof documents)["\n  query LaunchById ($launchId: ID!) {\n    launch(id: $launchId) {\n      mission_name\n      launch_date_local\n      rocket {\n        rocket_name\n        rocket {\n          description\n        }\n        rocket_type\n      }\n      links {\n        mission_patch\n        mission_patch_small\n        video_link\n        flickr_images\n        reddit_launch\n        article_link\n        wikipedia\n        reddit_recovery\n        reddit_media\n        reddit_campaign\n        presskit\n      }\n      launch_success\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
