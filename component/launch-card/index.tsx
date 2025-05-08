@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Box,
   Card,
   Grid,
   CardMedia,
@@ -47,13 +48,21 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
               {format(launch.launch_date_local, "dd/MM/yyyy")}
             </Typography>
 
-            <Typography>Rocket: {launch.rocket?.rocket_name}</Typography>
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Box>
+                <Typography>Rocket: {launch.rocket?.rocket_name}</Typography>
 
-            <Typography>
-              Launch site: {launch.launch_site?.site_name || "Unspecified"}
-            </Typography>
+                <Typography>
+                  Launch site: {launch.launch_site?.site_name || "Unspecified"}
+                </Typography>
+              </Box>
 
-            <LaunchSuccessIcon success={Boolean(launch.launch_success)} />
+              <LaunchSuccessIcon success={Boolean(launch.launch_success)} />
+            </Box>
           </CardContent>
         </CardActionArea>
       </Card>
