@@ -1,31 +1,20 @@
-"use client";
-
+import LauchPageProps from "./type";
 import { Stack } from "@mui/material";
-import Loader from "@/component/loader";
-import { useEffect, useState } from "react";
 import { getLaunchById } from "@/api/launches";
 import RocketInfo from "@/component/rocket-info";
-import LauchPageProps, { LaunchById } from "./type";
-import LaunchDetailsHeader from "@/component/lauch-details-header";
 import YouTubeEmbed from "@/component/youtube-embed";
 import { getYouTubeVideoId } from "@/utils/extractYoutubeId";
+import LaunchDetailsHeader from "@/component/lauch-details-header";
 
-export default function LauchPage({ params }: LauchPageProps) {
-  const [id, setId] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [launchData, setLaunchData] = useState<LaunchById | null>(null);
+export default async function LauchPage({ params }: LauchPageProps) {
+  const { id } = await params;
 
-  useEffect(() => {
-    params.then(({ id }) => setId(id));
+  const { data } = await getLaunchById(id);
+  const launchData = data?.launch;
 
-    getLaunchById(id)
-      .then(({ data }) => setLaunchData(data.launch))
-      .finally(() => setLoading(false));
-  }, [id, params]);
+  if (!launchData) return <div>No Data</div>;
 
-  if (loading) return <Loader />;
-
-  if (!launchData) return "No Data";
+  const videoId = getYouTubeVideoId(launchData.links?.video_link);
 
   return (
     <div>
@@ -37,9 +26,7 @@ export default function LauchPage({ params }: LauchPageProps) {
           description={launchData.rocket?.rocket?.description as string}
         />
 
-        <YouTubeEmbed
-          videoId={getYouTubeVideoId(launchData.links?.video_link as string)!}
-        />
+        {videoId && <YouTubeEmbed videoId={videoId} />}
       </Stack>
     </div>
   );

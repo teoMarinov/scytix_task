@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import YouTube from "react-youtube";
 import { Box } from "@mui/material";
