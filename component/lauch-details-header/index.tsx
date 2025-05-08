@@ -1,40 +1,45 @@
+"use client";
+
 import React from "react";
-import { Box, Stack, Typography } from "@mui/material";
-import { LaunchById } from "@/app/launch/[id]/type";
 import { format } from "date-fns";
+import { LaunchById } from "@/app/launch/[id]/type";
+import LaunchSuccessIcon from "../launch-succes-icon";
+import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
 
 export default function LaunchDetailsHeader({
   launchData,
 }: {
   launchData: NonNullable<LaunchById>;
 }) {
+  const isLargeScreen = useMediaQuery("(min-width:700px)");
+
   const image =
     launchData?.links?.mission_patch ||
     launchData?.links?.flickr_images?.at(-1) ||
     "/png/no-launch-image.png";
 
-    return (
+  return (
     <Box
       sx={{
-        position: "relative",
         width: "100%",
         height: "300px",
-        backgroundImage: `url(${image})`,
+        position: "relative",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundImage: `url(${image})`,
       }}
     >
       <Box
         sx={{
-          position: "absolute",
-          left: 0,
+          px: 3,
           top: 0,
-          width: "50%",
+          left: 0,
           height: "100%",
-          background: "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0))",
           display: "flex",
           alignItems: "center",
-          paddingLeft: 3,
+          position: "absolute",
+          width: isLargeScreen ? "50%" : "auto",
+          background: "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0))",
         }}
       >
         <Stack color={"white"}>
@@ -42,19 +47,16 @@ export default function LaunchDetailsHeader({
             {launchData.mission_name}
           </Typography>
 
-          <Typography fontSize={"14px"} pl={0.3}>
+          <Typography
+            gap={1}
+            pl={0.3}
+            display={"flex"}
+            fontSize={"16px"}
+            alignItems={"center"}
+          >
             {format(launchData?.launch_date_local, "dd/MM/yyyy")}
 
-            <Box
-              component="span"
-              sx={{
-                marginLeft: 1,
-                fontWeight: 500,
-                color: launchData.launch_success ? "green" : "red",
-              }}
-            >
-              {launchData.launch_success ? "Success" : "Fail"}
-            </Box>
+            <LaunchSuccessIcon success={Boolean(launchData.launch_success)} />
           </Typography>
         </Stack>
       </Box>

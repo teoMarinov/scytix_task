@@ -11,6 +11,7 @@ import {
 import { format } from "date-fns";
 import LaunchCardProps from "./type";
 import { useRouter } from "next/navigation";
+import LaunchSuccessIcon from "../launch-succes-icon";
 
 export default function LaunchCard({ launch }: LaunchCardProps) {
   const router = useRouter();
@@ -49,12 +50,10 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
             <Typography>Rocket: {launch.rocket?.rocket_name}</Typography>
 
             <Typography>
-              Launch site: {launch.launch_site?.site_name || "-"}
+              Launch site: {launch.launch_site?.site_name || "Unspecified"}
             </Typography>
 
-            <Typography color={launch.launch_success ? "green" : "red"}>
-              {launch.launch_success ? "Success" : "Fail"}
-            </Typography>
+            <LaunchSuccessIcon success={Boolean(launch.launch_success)} />
           </CardContent>
         </CardActionArea>
       </Card>
