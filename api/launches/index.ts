@@ -21,16 +21,18 @@ export async function fetchAllLaunches(
   const variables: LaunchesQueryVariables = {
     limit: 10,
     offset: page * 10,
+
+    order: "DESC",
+    sort: "launch_date_local",
+
     find: {
       mission_name: missionName,
     },
-    order: "DESC",
-    sort: "launch_date_local",
   };
 
   return await client.query<LaunchesQuery, LaunchesQueryVariables>({
-    query: LAUNCHES_QUERY,
     variables,
+    query: LAUNCHES_QUERY,
   });
 }
 

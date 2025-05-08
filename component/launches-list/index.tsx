@@ -1,14 +1,10 @@
 "use client";
 
+import LauchesListProps from "./type";
 import LaunchCard from "../launch-card";
-import { LaunchQueryResult } from "@/app/type";
 import { Grid, useMediaQuery } from "@mui/material";
 
-export default function LauchesList({
-  launches,
-}: {
-  launches: LaunchQueryResult[];
-}) {
+export default function LauchesList({ launches }: LauchesListProps) {
   const isLargeScreen = useMediaQuery("(min-width:700px)");
 
   return (

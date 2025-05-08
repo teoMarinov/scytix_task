@@ -2,15 +2,13 @@
 
 import React from "react";
 import { format } from "date-fns";
-import { LaunchById } from "@/app/launch/[id]/type";
+import LauchDetailsHeaderProps from "./type";
 import LaunchSuccessIcon from "../launch-succes-icon";
 import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
 
 export default function LaunchDetailsHeader({
   launchData,
-}: {
-  launchData: NonNullable<LaunchById>;
-}) {
+}: LauchDetailsHeaderProps) {
   const isLargeScreen = useMediaQuery("(min-width:700px)");
 
   const image =

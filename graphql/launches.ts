@@ -10,8 +10,8 @@ export const LAUNCHES_QUERY = gql`
   ) {
     launches(
       limit: $limit
-      offset: $offset
       find: $find
+      offset: $offset
       order: $order
       sort: $sort
     ) {

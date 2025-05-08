@@ -1,15 +1,13 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import ClientPaginationProps from "./type";
 import { Pagination, useMediaQuery } from "@mui/material";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ClientPagination({
   totalPages,
   currentPage,
-}: {
-  totalPages: number;
-  currentPage: number;
-}) {
+}: ClientPaginationProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isLargeScreen = useMediaQuery("(min-width:700px)");
