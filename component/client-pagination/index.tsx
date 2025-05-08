@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Pagination, useMediaQuery } from "@mui/material";
 
 export default function ClientPagination({
@@ -11,10 +11,14 @@ export default function ClientPagination({
   currentPage: number;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const isLargeScreen = useMediaQuery("(min-width:700px)");
 
   const handleChange = (_: React.ChangeEvent<unknown>, newPage: number) => {
-    router.push(`/?page=${newPage}`);
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+
+    params.set("page", newPage.toString());
+    router.push(`/?${params}`);
   };
 
   return (
