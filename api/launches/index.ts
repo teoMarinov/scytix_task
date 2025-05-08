@@ -1,22 +1,22 @@
 import {
+  LAUNCHES_QUERY,
+  GET_LAUNCH_BY_ID,
+  ALL_LAUCHES_ID_QUERY,
+} from "@/graphql/launches";
+import {
+  LaunchesQuery,
   LaunchByIdQuery,
   LaunchesIdsQuery,
-  LaunchesQuery,
   LaunchesQueryVariables,
 } from "@/__generated__/graphql";
-import {
-  ALL_LAUCHES_ID_QUERY,
-  GET_LAUNCH_BY_ID,
-  LAUNCHES_QUERY,
-} from "@/graphql/launches";
 import createApolloClient from "@/apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-
-const client = createApolloClient();
 
 export async function fetchAllLaunches(
   page: number
 ): Promise<ApolloQueryResult<LaunchesQuery>> {
+  const client = createApolloClient();
+
   const variables: LaunchesQueryVariables = {
     limit: 10,
     offset: page * 10,
@@ -29,6 +29,8 @@ export async function fetchAllLaunches(
 }
 
 export async function getAllLauchesCount(): Promise<number> {
+  const client = createApolloClient();
+
   const { data } = await client.query<LaunchesIdsQuery>({
     query: ALL_LAUCHES_ID_QUERY,
   });
@@ -41,6 +43,8 @@ export async function getAllLauchesCount(): Promise<number> {
 export async function getLaunchById(
   launchId: string
 ): Promise<ApolloQueryResult<LaunchByIdQuery>> {
+  const client = createApolloClient();
+
   const variables = {
     launchId,
   };
