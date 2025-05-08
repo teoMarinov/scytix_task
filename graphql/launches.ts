@@ -50,20 +50,11 @@ export const GET_LAUNCH_BY_ID = gql`
         rocket {
           description
         }
-        rocket_type
       }
       links {
         mission_patch
-        mission_patch_small
         video_link
         flickr_images
-        reddit_launch
-        article_link
-        wikipedia
-        reddit_recovery
-        reddit_media
-        reddit_campaign
-        presskit
       }
       launch_success
     }
