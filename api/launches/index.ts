@@ -24,6 +24,8 @@ export async function fetchAllLaunches(
     find: {
       mission_name: missionName,
     },
+    order: "launch_date_local",
+    sort: "ASC",
   };
 
   return await client.query<LaunchesQuery, LaunchesQueryVariables>({
