@@ -3,11 +3,10 @@
 import { useDebounce } from "use-debounce";
 import { useState, useEffect } from "react";
 import { Paper, InputBase } from "@mui/material";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function DesktopSearchbar() {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [input, setInput] = useState(searchParams.get("mission_name") || "");
@@ -22,8 +21,8 @@ export default function DesktopSearchbar() {
       params.delete("mission_name");
     }
 
-    router.push(`${pathname}?${params.toString()}`);
-  }, [debouncedInput, pathname, router, searchParams]);
+    router.push(`/?${params.toString()}`);
+  }, [debouncedInput, router, searchParams]);
 
   return (
     <Paper

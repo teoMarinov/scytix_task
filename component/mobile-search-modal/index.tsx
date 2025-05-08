@@ -11,14 +11,13 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function MobileSearchModal() {
   const [input, setInput] = useState("");
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,7 +30,7 @@ export default function MobileSearchModal() {
       params.delete("mission_name");
     }
 
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`/?${params.toString()}`);
     setOpen(false);
   };
 
