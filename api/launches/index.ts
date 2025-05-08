@@ -50,7 +50,7 @@ export async function getLaunchById(
   };
 
   return client.query<LaunchesIdsQuery>({
-    query: GET_LAUNCH_BY_ID,
     variables,
+    query: GET_LAUNCH_BY_ID,
   });
 }

@@ -5,6 +5,7 @@ import RocketInfo from "@/component/rocket-info";
 import YouTubeEmbed from "@/component/youtube-embed";
 import { getYouTubeVideoId } from "@/utils/extractYoutubeId";
 import LaunchDetailsHeader from "@/component/lauch-details-header";
+import { notFound } from "next/navigation";
 
 export default async function LauchPage({ params }: LauchPageProps) {
   const { id } = await params;
@@ -12,7 +13,7 @@ export default async function LauchPage({ params }: LauchPageProps) {
   const { data } = await getLaunchById(id);
   const launchData = data?.launch;
 
-  if (!launchData) return <div>No Data</div>;
+  if (!launchData) return notFound();
 
   const videoId = getYouTubeVideoId(launchData.links?.video_link);
 
