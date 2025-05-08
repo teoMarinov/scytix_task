@@ -93,74 +93,81 @@ export const GET_LAUNCH_BY_ID = gql`
 
 ## 🛠 Getting Started
 
-### Local Development
+### Environment Setup
 
-1. **Install dependencies**
+1. Create a `.env` file in the root directory:
+    ```bash
+    cp .env.example .env
+    ```
 
-```bash
-npm install
-```
+2. Set the required environment variable in `.env`:
 
-2. **Set up environment variables**
-
-Create a `.env` file in the root of the project and copy the contents of `.env.example`. Set the following:
-
-```
-NEXT_PUBLIC_BACKEND_URL=https://spacex-production.up.railway.app/
-```
-
-3. **Run the development server**
-
-```bash
-npm run dev
-```
-
-4. **(Optional) Generate GraphQL Types**
-
-```bash
-npm run generate
-```
+    ```env
+    NEXT_PUBLIC_BACKEND_URL=https://spacex-production.up.railway.app/
+    ```
 
 ---
 
 ## 🐳 Running with Docker Compose
 
-### Prerequisites
+### Requirements
 
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
+- [Docker](https://www.docker.com/) (optional, for containerized setup)
+- [Docker Compose](https://docs.docker.com/compose/) (for multi-container management)
 
-### Quick Start
+1. **Build and run the app**:
 
-1. **Build and run the app**
+    ```bash
+    docker-compose up --build
+    ```
 
-```bash
-docker-compose up --build
-```
+2. **Access the app**:
 
-2. **Visit the app**
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-```
-http://localhost:3000
-```
+3. **Subsequent runs** (after the first build):
 
-3. **Subsequent runs**
+    ```bash
+    docker-compose up
+    ```
 
-After the initial build, you can start it faster with:
+4. **Stop the app**:
 
-```bash
-docker-compose up
-```
+    ```bash
+    docker-compose down
+    ```
 
-4. **Stopping the app**
-
-To shut down the container:
-
-```bash
-docker-compose down
-```
+> ℹ️ Environment variables will be loaded from your `.env` file using `env_file` in Docker Compose.
 
 ---
+
+## 💻 Running Locally with npm
+
+### Requirements
+
+- [Node.js](https://nodejs.org/) (version 18 or above)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+ 
+
+1. **Install dependencies**:
+
+    ```bash
+    npm install
+    ```
+
+2. **Run the development server**:
+
+    ```bash
+    npm run dev
+    ```
+
+3. **(Optional) Generate GraphQL types**:
+
+    ```bash
+    npm run generate
+    ```
+
+> The app will be available at [http://localhost:3000](http://localhost:3000)
 
 ## 🗂 Folder Structure
 

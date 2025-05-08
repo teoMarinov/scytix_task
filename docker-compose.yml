@@ -7,8 +7,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_BACKEND_URL=https://spacex-production.up.railway.app/
+    env_file:
+      - .env
     volumes:
       - .:/app
       - /app/node_modules
+
