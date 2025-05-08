@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Stack } from "@mui/material";
 import LauchesList from "@/component/launches-list";
 import HomeProps, { LaunchQueryResult } from "./type";
@@ -17,7 +18,9 @@ export default async function Home({ searchParams }: HomeProps) {
     <Stack alignItems="center" pb={3}>
       <LauchesList launches={launches} />
 
-      <ClientPagination totalPages={totalPages} currentPage={page} />
+      <Suspense>
+        <ClientPagination totalPages={totalPages} currentPage={page} />
+      </Suspense>
     </Stack>
   );
 }
