@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  IconButton,
-  Modal,
-  Paper,
-  InputBase,
-  Button,
-  Stack,
   Box,
+  Paper,
+  Stack,
+  Modal,
+  Button,
+  InputBase,
+  IconButton,
 } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
