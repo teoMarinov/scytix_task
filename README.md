@@ -1,4 +1,4 @@
-# Scytix Task
+# [Scytix Task 🔗](https://scytix-task.vercel.app/)
 
 This is a **Next.js frontend application** built using **Material-UI (MUI)** and **Apollo Client for GraphQL**.
 
