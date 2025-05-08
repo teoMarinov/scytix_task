@@ -13,13 +13,17 @@ import createApolloClient from "@/apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 
 export async function fetchAllLaunches(
-  page: number
+  page: number,
+  missionName?: string
 ): Promise<ApolloQueryResult<LaunchesQuery>> {
   const client = createApolloClient();
 
   const variables: LaunchesQueryVariables = {
     limit: 10,
     offset: page * 10,
+    find: {
+      mission_name: missionName,
+    },
   };
 
   return await client.query<LaunchesQuery, LaunchesQueryVariables>({

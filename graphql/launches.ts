@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const LAUNCHES_QUERY = gql`
-  query Launches($limit: Int, $offset: Int) {
-    launches(limit: $limit, offset: $offset) {
+  query Launches($limit: Int, $offset: Int, $find: LaunchFind) {
+    launches(limit: $limit, offset: $offset, find: $find) {
       id
       mission_name
       launch_date_local
@@ -29,7 +29,7 @@ export const ALL_LAUCHES_ID_QUERY = gql`
 `;
 
 export const GET_LAUNCH_BY_ID = gql`
-  query LaunchById ($launchId: ID!) {
+  query LaunchById($launchId: ID!) {
     launch(id: $launchId) {
       mission_name
       launch_date_local

@@ -26,9 +26,9 @@ export default function MobileSearchModal() {
 
     const params = new URLSearchParams(Array.from(searchParams.entries()));
     if (input) {
-      params.set("launch_name", input);
+      params.set("mission_name", input);
     } else {
-      params.delete("launch_name");
+      params.delete("mission_name");
     }
 
     router.push(`${pathname}?${params.toString()}`);

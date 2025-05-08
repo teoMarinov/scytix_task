@@ -10,16 +10,16 @@ export default function DesktopSearchbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [input, setInput] = useState(searchParams.get("launch_name") || "");
+  const [input, setInput] = useState(searchParams.get("mission_name") || "");
   const [debouncedInput] = useDebounce(input, 500);
 
   useEffect(() => {
     const params = new URLSearchParams(Array.from(searchParams.entries()));
 
     if (debouncedInput) {
-      params.set("launch_name", debouncedInput);
+      params.set("mission_name", debouncedInput);
     } else {
-      params.delete("launch_name");
+      params.delete("mission_name");
     }
 
     router.push(`${pathname}?${params.toString()}`);
