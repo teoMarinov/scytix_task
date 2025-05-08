@@ -6,7 +6,7 @@ import HeaderSearchbar from "../header-searchbar";
 import { Grid, useMediaQuery } from "@mui/material";
 
 export default function Header() {
-  const isLargeScreen = useMediaQuery("(min-width:650px)");
+  const isLargeScreen = useMediaQuery("(min-width:700px)");
 
   return (
     <header>
@@ -29,7 +29,7 @@ export default function Header() {
           </Link>
         </Grid>
 
-        <Grid size={5} justifyItems={"center"}>
+        <Grid size={isLargeScreen ? 5 : 8.5} justifyItems={"end"}>
           <HeaderSearchbar isLargeScreen={isLargeScreen} />
         </Grid>
       </Grid>
