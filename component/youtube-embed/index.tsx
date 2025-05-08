@@ -1,9 +1,10 @@
-'use client'
+"use client";
 import React from "react";
 import YouTube from "react-youtube";
 import { Box } from "@mui/material";
+import YoutubeEmbededProps from "./type";
 
-export default function YouTubeEmbed({ videoId }: { videoId: string }) {
+export default function YouTubeEmbed({ videoId }: YoutubeEmbededProps) {
   const opts = {
     height: "420",
     width: "100%",

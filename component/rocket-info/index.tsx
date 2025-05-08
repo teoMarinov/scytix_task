@@ -1,13 +1,7 @@
-import React from "react";
+import RocketInfoProps from "./type";
 import { Box, Typography } from "@mui/material";
 
-export default function RocketInfo({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+export default function RocketInfo({ title, description }: RocketInfoProps) {
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: "bold", mb: 0.5 }}>
