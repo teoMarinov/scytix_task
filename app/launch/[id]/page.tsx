@@ -1,11 +1,11 @@
 import LauchPageProps from "./type";
 import { Stack } from "@mui/material";
+import { notFound } from "next/navigation";
 import { getLaunchById } from "@/api/launches";
 import RocketInfo from "@/component/rocket-info";
 import YouTubeEmbed from "@/component/youtube-embed";
 import { getYouTubeVideoId } from "@/utils/extractYoutubeId";
 import LaunchDetailsHeader from "@/component/lauch-details-header";
-import { notFound } from "next/navigation";
 
 export default async function LauchPage({ params }: LauchPageProps) {
   const { id } = await params;

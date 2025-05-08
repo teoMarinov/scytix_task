@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { Pagination, useMediaQuery } from "@mui/material";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ClientPagination({
   totalPages,
