@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Box,
   Card,
   Grid,
   CardMedia,
@@ -11,6 +12,7 @@ import {
 import { format } from "date-fns";
 import LaunchCardProps from "./type";
 import { useRouter } from "next/navigation";
+import LaunchSuccessIcon from "../launch-succes-icon";
 
 export default function LaunchCard({ launch }: LaunchCardProps) {
   const router = useRouter();
@@ -46,15 +48,21 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
               {format(launch.launch_date_local, "dd/MM/yyyy")}
             </Typography>
 
-            <Typography>Rocket: {launch.rocket?.rocket_name}</Typography>
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Box>
+                <Typography>Rocket: {launch.rocket?.rocket_name}</Typography>
 
-            <Typography>
-              Launch site: {launch.launch_site?.site_name || "-"}
-            </Typography>
+                <Typography>
+                  Launch site: {launch.launch_site?.site_name || "Unspecified"}
+                </Typography>
+              </Box>
 
-            <Typography color={launch.launch_success ? "green" : "red"}>
-              {launch.launch_success ? "Success" : "Fail"}
-            </Typography>
+              <LaunchSuccessIcon success={Boolean(launch.launch_success)} />
+            </Box>
           </CardContent>
         </CardActionArea>
       </Card>
